@@ -1,8 +1,0 @@
-#!/usr/bin/env ruby
-$LOAD_PATH << File.expand_path('../../lib', __FILE__)
-require 'bot_trust'
-
-abort("usage: bottrust file") unless ARGV[0]
-
-runner = BotTrust::Runner.new(STDOUT)
-runner.solve_file(ARGV[0])

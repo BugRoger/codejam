@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+$LOAD_PATH << File.expand_path('../../lib', __FILE__)
+require 'codejam'
+
+problems = CodeJam::Problem.subclasses 
+
+abort("usage: codejam problem file") unless ARGV[0] && ARGV[1]
+abort("problem must be one of: #{problems.join(", ")}") unless problems.include?(ARGV[0])
+
+runner = CodeJam::Runner.new(ARGV[0], STDOUT)
+runner.solve(ARGV[1])

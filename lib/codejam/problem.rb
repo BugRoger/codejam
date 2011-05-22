@@ -2,20 +2,30 @@ module CodeJam
   class Problem 
     include Support
 
-    def initialize(output)
+    def initialize(test, output)
       @output = output
+
+      setup_logging
+      prepare(test)
     end
 
-    def prepare(inout)
+    def self.split(input)
+      count = input[0].to_i
+
+      tests = []
+      1.upto(count) do |i|
+        tests << input[i]
+      end 
+
+      tests
+    end
+
+    def prepare(test)
       raise 'this method should be overriden'
     end
 
-    def solve(input = [])
+    def solve
       raise 'this method should be overriden'
-    end
-
-    def solve!(input)
-      solve(prepare(input))
     end
 
     def self.subclasses

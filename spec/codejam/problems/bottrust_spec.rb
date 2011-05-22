@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-module BotTrust 
+module CodeJam 
   describe BotTrust do
-    it_should_behave_like "a problem that", "BotTrust" 
+    it_should_behave_like "a correct solution" 
   end
 end

@@ -1,3 +1,6 @@
+##
+# Supporting code can be found at https://github.com/BugRoger/codejam
+##
 module CodeJam
   class FreeCell < Problem
     def prepare(input)
@@ -8,7 +11,7 @@ module CodeJam
       @pg = tokens.shift.to_i
     end
 
-    def solve(input)
+    def solve
       isPossiblePd? && isPossiblePg? ? "Possible" : "Broken"
     end
 

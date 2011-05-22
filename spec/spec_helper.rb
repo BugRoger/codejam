@@ -2,17 +2,17 @@ require 'codejam'
 require 'stringio'
 
 module CodeJam
-  shared_examples_for "a problem that" do |name|
+  shared_examples_for "a correct solution" do 
     let(:output)  { double ('output').as_null_object }
-    let(:runner)  { Runner.new(name, output) }
+    let(:problem) { described_class.to_s.split("::").last }
+    let(:runner)  { Runner.new(problem, "data/#{problem.downcase}/test.in", output) }
 
-    it "solved test.in and return content of test.out" do
-
-      File.open("data/#{name.downcase}/test.out").each_line do |line|
+    it "should solve test.in and return content of test.out" do
+      File.open("data/#{problem.downcase}/test.out").each_line do |line|
         output.should_receive(:puts).with(line.chomp)
       end
      
-      runner.solve("data/#{name.downcase}/test.in")
+      runner.solve
     end
   end
 end

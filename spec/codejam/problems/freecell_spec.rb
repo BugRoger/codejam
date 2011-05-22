@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-module FreeCell 
+module CodeJam 
   describe FreeCell do
-    it_should_behave_like "a problem that", "FreeCell" 
+    it_should_behave_like "a correct solution" 
   end
 end

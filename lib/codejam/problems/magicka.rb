@@ -1,3 +1,6 @@
+##
+# Supporting code can be found at https://github.com/BugRoger/codejam
+##
 module CodeJam
   class Magicka < Problem 
 
@@ -21,36 +24,32 @@ module CodeJam
       tokens = input.split
 
       count  = tokens.shift.to_i
-      combos = []
+      @combos = []
       count.times do
-        combos.push Combo.new(tokens.shift)
+        @combos.push Combo.new(tokens.shift)
       end 
 
       count = tokens.shift.to_i
-      wipes = []
+      @wipes = []
       count.times do
-        wipes.push Wipe.new(tokens.shift)
+        @wipes.push Wipe.new(tokens.shift)
       end 
 
       count = tokens.shift
-      spell = tokens.shift
-
-      return combos, wipes, spell
+      @spell = tokens.shift
     end 
 
-    def solve(input)
-      combos, wipes, spell = input
-
+    def solve
       list = "" 
-      spell.each_char do |char|
+      @spell.each_char do |char|
         list << char
 
-        combos.each do |combo|
+        @combos.each do |combo|
           list.sub!(/#{combo.b}#{combo.a}/, "#{combo.c}")
           list.sub!(/#{combo.a}#{combo.b}/, "#{combo.c}")
         end
         
-        wipes.each do |wipe|
+        @wipes.each do |wipe|
           list = "" if list[-1,1] == wipe.a and list.index(wipe.b)
           list = "" if list[-1,1] == wipe.b and list.index(wipe.a)
         end

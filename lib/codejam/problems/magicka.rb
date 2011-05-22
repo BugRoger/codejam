@@ -21,7 +21,7 @@ module CodeJam
 
 
     def prepare(input)
-      tokens = input.split
+      tokens = input[0].split
 
       count  = tokens.shift.to_i
       @combos = []

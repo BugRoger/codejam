@@ -3,21 +3,13 @@ module CodeJam
     include Support
 
     def initialize(test, output)
-      @output = output
-
+      @output   = output
       setup_logging
       prepare(test)
     end
 
-    def self.split(input)
-      count = input[0].to_i
-
-      tests = []
-      1.upto(count) do |i|
-        tests << input[i]
-      end 
-
-      tests
+    def self.splitter
+      SingleLineSplitter.new
     end
 
     def prepare(test)

@@ -4,19 +4,12 @@
 module CodeJam
   class RPI < Problem
 
-    def self.split(input)
-      tests = []
-      count = input.shift.to_i
-
-      1.upto(count) do |i|
-        teams = input.shift.to_i
-        tests << input.slice!(0, teams)
-      end
-
-      tests
+    def self.splitter
+      MultiLineSplitter.new
     end
 
     def prepare(input)
+      input.shift
       @size = input.length
 
       @schedule = {}

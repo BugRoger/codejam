@@ -4,7 +4,7 @@
 module CodeJam
   class FreeCell < Problem
     def prepare(input)
-      tokens = input.split
+      tokens = input[0].split
 
       @n  = tokens.shift.to_i
       @pd = tokens.shift.to_i

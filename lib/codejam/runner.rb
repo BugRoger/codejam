@@ -15,9 +15,7 @@ module CodeJam
       input = File.open(@file_name).readlines
 
       results = []
-      tests = @problem_class.split(input) 
-
-
+      tests = @problem_class.splitter.parse(input)
 
       1.upto(tests.length) do |i|
         @log.info "-" * 100

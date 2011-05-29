@@ -1,11 +1,5 @@
 module CodeJam
-  class Splitter
-    def parse(lines = [])
-      raise "Implement me"
-    end
-  end
-
-  class SingleLineSplitter < Splitter
+  module SingleLineSplitter 
     def parse(lines = [])
       count = lines.shift.to_i
 
@@ -20,7 +14,7 @@ module CodeJam
     end
   end
 
-  class MultiLineSplitter < Splitter
+  module MultiLineSplitter
     def parse(lines = [])
       tests = []
       count = lines.shift.to_i

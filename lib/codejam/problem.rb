@@ -1,15 +1,22 @@
 module CodeJam
   class Problem 
     include Support
+    extend  SingleLineSplitter
+
+    class << self
+      attr_reader :classes
+
+      def inherited(klass)
+        @classes << klass.to_s.split("::").last
+      end
+
+    end
+    
+    @classes = []
 
     def initialize(test, output)
       @output   = output
-      setup_logging
       prepare(test)
-    end
-
-    def self.splitter
-      SingleLineSplitter.new
     end
 
     def prepare(test)
@@ -18,15 +25,6 @@ module CodeJam
 
     def solve
       raise 'this method should be overriden'
-    end
-
-    def self.subclasses
-      classes = []
-      ObjectSpace.each_object do |klass|
-        next unless Module === klass
-        classes << klass.to_s.split("::").last if self > klass
-      end
-      classes
     end
   end
 end

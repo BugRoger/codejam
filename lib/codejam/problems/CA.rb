@@ -5,6 +5,7 @@ module CodeJam
   class CA < Problem 
 
     def prepare(input)
+      tokens = input[0].split
     end 
 
     def solve

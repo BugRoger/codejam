@@ -3,10 +3,7 @@
 ##
 module CodeJam
   class RPI < Problem
-
-    def self.splitter
-      MultiLineSplitter.new
-    end
+    extend MultiLineSplitter
 
     def prepare(input)
       input.shift
@@ -17,7 +14,7 @@ module CodeJam
         schedule = input[team-1].chomp
         @schedule[team] = schedule 
       end
-      @log.debug "Schedule: #{@schedule}"
+      debug "Schedule: #{@schedule}"
 
 
       @wp   = {}
@@ -28,18 +25,18 @@ module CodeJam
       1.upto(@size) do |team|
         @wp[team]  = calculate_wp(@schedule[team], -1)
       end
-      @log.debug "WP: " + @wp.inspect
+      debug "WP: " + @wp.inspect
 
        1.upto(@size) do |team|
         @owp[team] = calculate_owp(@schedule[team], team)
       end
-      @log.debug "OWP: " + @owp.inspect
+      debug "OWP: " + @owp.inspect
       
 
       1.upto(@size) do |team|
         @oowp[team] = calculate_oowp(@schedule[team])
       end
-      @log.debug "OOWP: " + @oowp.inspect
+      debug "OOWP: " + @oowp.inspect
 
       return input
     end
@@ -73,7 +70,7 @@ module CodeJam
       end
 
       wp = total == 0 ? 0 : won.to_f / total
-      @log.debug "calculate_wp(#{schedule}, #{throwOutTeam}) => total = #{total}, won = #{won}, lost = #{lost}, wp = #{wp}"
+      debug "calculate_wp(#{schedule}, #{throwOutTeam}) => total = #{total}, won = #{won}, lost = #{lost}, wp = #{wp}"
 
 
       wp
@@ -92,7 +89,7 @@ module CodeJam
       end
 
       owp = total == 0 ? 0 : sum_wp / total
-      @log.debug "Schedule: #{schedule}, Team: #{team} => owp = #{owp}"
+      debug "Schedule: #{schedule}, Team: #{team} => owp = #{owp}"
 
       owp 
     end

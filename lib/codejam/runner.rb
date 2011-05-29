@@ -1,5 +1,4 @@
 module CodeJam
-
   class Runner 
     include Support
 
@@ -7,23 +6,20 @@ module CodeJam
       @problem_class = CodeJam.const_get(problem_class) 
       @file_name     = file_name
       @output        = output
-
-      setup_logging
     end
 
     def solve
       input = File.open(@file_name).readlines
 
       results = []
-      tests = @problem_class.splitter.parse(input)
+      tests = @problem_class.parse(input)
 
       1.upto(tests.length) do |i|
-        @log.info "-" * 100
-        @log.info "Case ##{i}:" 
-        @log.info "-" * 100
-        @log.info ""
-        @log.info tests[i-1].join
-        @log.info "" 
+        info "\n\n"
+        info "-" * 100
+        info "Case ##{i}:" 
+        info "-" * 100
+        info "\n#{tests[i-1].join}\n"
 
         result = @problem_class.new(tests[i-1], @output).solve
         print(i, result.to_s)
@@ -33,20 +29,12 @@ module CodeJam
     def print(i, result)
       lines = result.split("\n")
       
-      @log.info ""
       if lines.length == 1
-        puts      "Case ##{i}: #{result}" 
-        @log.info "Case ##{i}: #{result}\n"
+        puts "Case ##{i}: #{result}" 
       else 
-        puts      "Case ##{i}:"
-        @log.info "Case ##{i}:"
-        
-        lines.each {|l| puts l; @log.info l}
+        puts "Case ##{i}:"
+        lines.each {|l| puts l}
       end
-      @log.info ""
-      @log.info ""
-      
     end
   end
-
 end

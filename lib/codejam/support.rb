@@ -9,11 +9,25 @@ module CodeJam
     end
   end
 
+  class << self
+    attr_accessor :logger
+  end
+
+  @logger           = Logger.new(STDERR)
+  @logger.level     = Logger::DEBUG
+  @logger.formatter = SimpleFormatter.new
+  
   module Support
-    def setup_logging
-      @log           = Logger.new(STDERR)
-      @log.level     = Logger::DEBUG
-      @log.formatter = SimpleFormatter.new
+    def logger
+      CodeJam.logger
+    end
+
+    def debug(*args)
+      CodeJam.logger.debug(*args)
+    end
+
+    def info(*args)
+      CodeJam.logger.info(*args)
     end
 
     def puts(*args)

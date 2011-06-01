@@ -5,18 +5,8 @@ module CodeJam
   class CB < Problem 
 
     def prepare(input)
-      tokens = input[0].split
+      @boosters, @time, @planets, c, *@cycle = input[0].split.map(&:to_i)
       
-      @boosters = tokens.shift.to_i
-      @time     = tokens.shift.to_i
-      @planets  = tokens.shift.to_i
-
-      c = tokens.shift.to_i
-      @cycle = []
-      c.times do
-        @cycle << tokens.shift.to_i
-      end
-
       @path = []
       @cycle.cycle((@planets.to_f / c).ceil) { |d| @path <<  d * 2 if @path.length < @planets}
     end 

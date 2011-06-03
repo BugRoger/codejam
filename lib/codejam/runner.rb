@@ -19,21 +19,19 @@ module CodeJam
         info "-" * 100
         info "Case ##{i}:" 
         info "-" * 100
-        info "\n#{tests[i-1].join}\n"
+        info "\n#{tests[i-1].join("\n")}\n"
 
         result = @problem_class.new(tests[i-1], @output).solve
-        print(i, result.to_s)
+        print(i, result)
       end 
     end
 
     def print(i, result)
-      lines = result.split("\n")
-      
-      if lines.length == 1
-        puts "Case ##{i}: #{result}" 
-      else 
+      if result.respond_to?(:each) 
         puts "Case ##{i}:"
-        lines.each {|l| puts l}
+        result.each {|l| puts l}
+      else 
+        puts "Case ##{i}: #{result}" 
       end
     end
   end

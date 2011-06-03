@@ -50,7 +50,7 @@ module CodeJam
         result << "%.12g" % rpi 
       end
 
-      result.join("\n")
+      result
     end
 
 

@@ -2,7 +2,7 @@
 # Supporting code can be found at https://github.com/BugRoger/codejam
 ##
 module CodeJam
-  class CC < Problem 
+  class PerfectHarmony < Problem 
 
     def prepare(input)
     end 

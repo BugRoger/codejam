@@ -2,7 +2,7 @@
 # Supporting code can be found at https://github.com/BugRoger/codejam
 ##
 module CodeJam
-  class CB < Problem 
+  class SpaceEmergency < Problem 
 
     def prepare(input)
       @boosters, @build_time, @planets, @cycle_size, *@cycle = input[0].split.map(&:to_i)

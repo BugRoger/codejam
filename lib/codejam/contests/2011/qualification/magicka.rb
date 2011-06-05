@@ -4,59 +4,59 @@
 module CodeJam
   class Magicka < Problem 
 
-    class Combo < Struct.new(:a, :b, :c)
-      def initialize(input)
-        self.a = input[0]
-        self.b = input[1]
-        self.c = input[2]
-      end
-    end
+    class Combo < Struct.new(:a, :b); end
+    class Wipe  < Struct.new(:a, :b); end
 
-    class Wipe  < Struct.new(:a, :b)
-      def initialize(input)
-        self.a = input[0]
-        self.b = input[1]
+    class Cast < String
+      def apply!(combo)
+        sub!(/#{combo.a}/, combo.b)
+      end
+
+      def triggers?(wipe)
+        include?(wipe.a) && end_with?(wipe.b)
       end
     end
 
 
     def prepare(input)
+      @combos = []
+      @wipes  = []
+      @cast   = Cast.new 
+      
       tokens = input[0].split
 
-      count  = tokens.shift.to_i
-      @combos = []
-      count.times do
-        @combos.push Combo.new(tokens.shift)
-      end 
+      tokens.shift.to_i.times do
+        a, b, c = tokens.shift.split(//)
+        @combos << Combo.new(a+b, c) 
+        @combos << Combo.new(b+a, c)
+      end
 
-      count = tokens.shift.to_i
-      @wipes = []
-      count.times do
-        @wipes.push Wipe.new(tokens.shift)
-      end 
+      tokens.shift.to_i.times do
+        a, b = tokens.shift.split(//)
+        @wipes << Wipe.new(a, b)
+        @wipes << Wipe.new(b, a)
+      end
 
-      count = tokens.shift
-      @spell = tokens.shift
+      _, @spell = tokens
     end 
 
     def solve
-      list = "" 
       @spell.each_char do |char|
-        list << char
-
-        @combos.each do |combo|
-          list.sub!(/#{combo.b}#{combo.a}/, "#{combo.c}")
-          list.sub!(/#{combo.a}#{combo.b}/, "#{combo.c}")
-        end
-        
-        @wipes.each do |wipe|
-          list = "" if list[-1,1] == wipe.a and list.index(wipe.b)
-          list = "" if list[-1,1] == wipe.b and list.index(wipe.a)
-        end
+        @cast << char
+        combine!
+        wipe! 
       end
 
-      "[%s]" % list.split(//).join(", ")
+      "[%s]" % @cast.split(//).join(", ")
     end 
+
+    def combine!
+      @combos.each { |combo| @cast.apply!(combo) }
+    end
+
+    def wipe!
+      @cast.clear if @wipes.any? { |wipe| @cast.triggers?(wipe) }
+    end
   end
 
 end

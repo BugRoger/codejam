@@ -1,5 +1,0 @@
-require "codejam/support"
-require "codejam/runner"
-require "codejam/splitter"
-require "codejam/problem"
-require "codejam/contests"

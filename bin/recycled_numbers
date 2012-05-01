@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 $LOAD_PATH << File.expand_path('../../lib', __FILE__)
-require 'codejam'
+require 'problems/recycled_numbers'
 
 RecycledNumbers.new(ARGV[0])

@@ -1,0 +1,18 @@
+# Supporting code can be found at https://github.com/BugRoger/codejam
+require "support/logging"
+
+class <%= name.classify %> 
+  include CodeJam::Logging
+
+  def initialize(filename)
+    input = File.readlines(filename)
+
+    input.shift.to_i.times do |i|
+      puts "Case ##{i+1}: #{solve(input.shift.chomp)}"
+    end
+  end
+
+  def solve(input)
+    input.downcase
+  end
+end

@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 $LOAD_PATH << File.expand_path('../../lib', __FILE__)
-require "problems/speaking_in_tongues"
 
-SpeakingInTongues.new(ARGV[0])
+require "thor"
+require "support/generator"
+
+CodeJam::Generator.start

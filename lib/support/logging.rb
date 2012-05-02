@@ -13,7 +13,8 @@ module CodeJam
   end
 
   @logger           = Logger.new(STDERR)
-  @logger.level     = Logger::DEBUG
+  @logger.level     = Logger::INFO  if ENV["DEBUG"] 
+  @logger.level     = Logger::DEBUG if ENV["DEBUG"] == "DEBUG"
   @logger.formatter = SimpleFormatter.new
   @output           = STDOUT
 

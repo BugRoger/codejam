@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+$LOAD_PATH << File.expand_path('../../lib', __FILE__)
+require "problems/tide_goes_in"
+
+TideGoesIn.new(ARGV[0])
